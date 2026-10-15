@@ -3,28 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>MCH3 S&L&C Win Rural</title>
+<title>BÁO CÁO HỦY & MCH Win Rural</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-:root{
-  --bg:#f3f5f4; --surface:#ffffff; --line:#d9dfdd; --ink:#17221f; --muted:#5d6b67;
-  --red:#b91c1c; --orange:#b45309; --green:#15803d; --teal:#0f5f57;
-  --red-soft:#fbe6e6; --orange-soft:#fbf0dd; --green-soft:#e5f4ea; --teal-soft:#e2f0ee;
-  --accent:#c2410c;
-}
+:root{--bg:#f3f5f4;--surface:#fff;--line:#d9dfdd;--ink:#17221f;--muted:#5d6b67;--red:#b91c1c;--orange:#b45309;--green:#15803d;--teal:#0f5f57;--red-soft:#fbe6e6;--orange-soft:#fbf0dd;--green-soft:#e5f4ea;--teal-soft:#e2f0ee;--accent:#c2410c}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 "Be Vietnam Pro",system-ui,sans-serif;font-variant-numeric:tabular-nums}
-.wrap{max-width:1600px;margin:0 auto;padding:10px 14px 28px;display:grid;gap:8px}
-.top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;background:#d71920;color:#fff;font:800 17px/1 "Be Vietnam Pro",system-ui,sans-serif}
-.brand h1{margin:0;font:700 17px/1.1 "Be Vietnam Pro",system-ui,sans-serif}
-.tag{background:#d71920;color:#fff;font:600 9px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:3px}
-.tag.sub{background:var(--teal);margin-left:4px}
-.fileinfo{color:var(--muted);font-size:11px}
-.btn{font:600 12px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 10px;border-radius:6px;cursor:pointer}
+body{margin:0;background:var(--bg);color:var(--ink);font:12.5px/1.45 "Be Vietnam Pro",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{max-width:100%;margin:0 auto;padding:8px 12px 24px;display:grid;gap:6px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:8px}
+.logo{display:grid;place-items:center;width:28px;height:28px;border-radius:6px;background:#d71920;color:#fff;font:800 16px/1 "Be Vietnam Pro",system-ui,sans-serif}
+.brand h1{margin:0;font:700 15px/1.1 "Be Vietnam Pro",system-ui,sans-serif}
+.tag{background:#d71920;color:#fff;font:600 9px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.tag.sub{background:var(--teal);margin-left:3px}
+.fileinfo{color:var(--muted);font-size:10.5px}
+.btn{font:600 11px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:4px 9px;border-radius:5px;cursor:pointer}
 .btn:hover{border-color:var(--teal)}
 .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
 .drop{border:2px dashed var(--line);border-radius:10px;background:var(--surface);padding:20px;text-align:center;display:grid;gap:6px;justify-items:center;cursor:pointer}
@@ -32,45 +27,46 @@ body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 "Be Vietnam P
 .drop h2{margin:0;font:700 15px "Be Vietnam Pro",system-ui,sans-serif}
 .drop p{margin:0;color:var(--muted);font-size:12px}
 
-/* KPI */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.kpi{background:var(--surface);padding:8px 12px;display:grid;gap:1px}
-.kpi .lbl{font:600 9px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.kpi .v{font:700 18px/1.2 "Be Vietnam Pro",system-ui,sans-serif}
-.kpi .s{font-size:10.5px;color:var(--muted)}
-.up{color:var(--green)} .down{color:var(--red)} .warn{color:var(--orange)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.kpi{background:var(--surface);padding:6px 10px;display:grid;gap:1px}
+.kpi .lbl{font:600 8.5px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font:700 16px/1.2 "Be Vietnam Pro",system-ui,sans-serif}
+.kpi .s{font-size:10px;color:var(--muted)}
+.up{color:var(--green)}.down{color:var(--red)}.warn{color:var(--orange)}
 
-/* Tabs */
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line)}
-.tabs button{font:600 12px "Be Vietnam Pro",system-ui,sans-serif;border:0;background:none;color:var(--muted);padding:6px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs button{font:600 11px "Be Vietnam Pro",system-ui,sans-serif;border:0;background:none;color:var(--muted);padding:5px 10px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
 
-/* Filters */
-.filters{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:end}
+.filters{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:end}
 .f{display:grid;gap:1px}
-.f label{font:600 9px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-select,input[type=search]{font:500 12px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);border-radius:6px;padding:4px 7px;background:var(--surface);color:var(--ink)}
-input[type=search]{width:130px}
+.f label{font:600 9px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+select,input[type=search]{font:500 11px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);border-radius:5px;padding:3px 6px;background:var(--surface);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;align-self:end;margin-left:auto}
+.chip{font:500 10px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:2px 8px;cursor:pointer}
+.chip.on{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:600}
 
-/* Table */
-.tbl-wrap{overflow:auto;max-height:62vh;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:12px}
-th,td{padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:right}
-th{background:var(--surface);position:sticky;top:0;z-index:2;font:600 10px/1.2 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.015em;color:var(--muted);cursor:pointer}
+.tbl-wrap{overflow:auto;max-height:65vh;border:1px solid var(--line);border-radius:8px;background:var(--surface);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:max-content;min-width:100%;font-size:11px}
+th,td{padding:3px 7px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:right}
+th{position:sticky;z-index:2;background:var(--surface);font:600 9px/1.2 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.01em;color:var(--muted);cursor:pointer}
 th:hover{color:var(--teal)}
-th:first-child,td:first-child{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;min-width:160px;font-weight:600}
+th.g{top:0;text-align:center;text-transform:uppercase;letter-spacing:.05em;font-size:9px;border-left:1px solid var(--line)}
+th.gA{background:var(--teal);color:var(--surface)}
+th.c{top:17px}
+th.sticky,td.sticky{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;min-width:150px;max-width:220px;font-weight:600;border-right:1px solid var(--line)}
 tr:hover td{background:var(--teal-soft)}
 tr.total td{font-weight:700;background:var(--teal-soft);border-top:2px solid var(--teal)}
-.cell-bad{color:var(--red);font-weight:600} .cell-warn{color:var(--orange);font-weight:600} .cell-good{color:var(--green);font-weight:600}
-.bar{display:inline-block;height:5px;border-radius:2px;vertical-align:middle;margin-right:3px}
-.bar-red{background:var(--red)} .bar-orange{background:var(--orange)} .bar-green{background:var(--green)}
-.foot{color:var(--muted);font-size:10.5px;padding-top:6px;margin-top:4px}
+.cell-bad{color:var(--red);font-weight:600}.cell-warn{color:var(--orange);font-weight:600}.cell-good{color:var(--green);font-weight:600}
+.bar{display:inline-block;height:4px;border-radius:2px;vertical-align:middle;margin-right:2px}
+.bar-red{background:var(--red)}.bar-orange{background:var(--orange)}.bar-green{background:var(--green)}
+.foot{color:var(--muted);font-size:10px;padding-top:4px}
 
 @media(max-width:760px){
-  .wrap{padding:6px 8px 20px;gap:6px}
+  .wrap{padding:4px 6px 16px;gap:4px}
   .kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .kpi .v{font-size:15px} .kpi .lbl{font-size:8px}
-  th:first-child,td:first-child{min-width:120px}
+  .kpi .v{font-size:14px}
+  .chips{margin-left:0;flex-basis:100%}
 }
 </style>
 </head>
@@ -80,8 +76,8 @@ tr.total td{font-weight:700;background:var(--teal-soft);border-top:2px solid var
     <div class="brand">
       <div class="logo">W</div>
       <div>
-        <h1>MCH3 S&L&C Win Rural</h1>
-        <div class="fileinfo" id="fileinfo">Tải file Excel để bắt đầu</div>
+        <h1>BÁO CÁO HỦY & MCH Win Rural</h1>
+        <div class="fileinfo" id="fileinfo">Tải file Excel RECAP để bắt đầu</div>
       </div>
       <span class="tag">HỦY</span><span class="tag sub">MCH</span>
     </div>
@@ -93,322 +89,312 @@ tr.total td{font-weight:700;background:var(--teal-soft);border-top:2px solid var
   </div>
 
   <div class="drop" id="drop" onclick="document.getElementById('file').click()">
-    <h2>📊 Kéo thả file BÁO CÁO HỦY & MCH vào đây</h2>
-    <p>File .xlsb / .xlsx · Hỗ trợ định dạng RECAP</p>
+    <h2>📊 Kéo thả file RECAP vào đây</h2>
+    <p>File .xlsb / .xlsx · BÁO CÁO HỦY & MCH CHUỖI WINRURAL</p>
   </div>
-  <input type="file" id="file" accept=".xlsb,.xlsx,.xls,.csv" hidden onchange="loadFile(this.files[0])">
+  <input type="file" id="file" accept=".xlsb,.xlsx,.xls" hidden onchange="loadFile(this.files[0])">
 
   <div id="app" hidden>
     <div class="kpis" id="kpis"></div>
     <div class="tabs" id="tabs"></div>
-    <div class="filters">
-      <div class="f"><label>Tìm kiếm</label><input type="search" id="q" placeholder="Tên..." oninput="render()"></div>
-      <div class="f"><label>Sắp xếp</label><select id="fSort" onchange="render()">
-        <option value="slc-desc">S&L&C ↓</option><option value="slc-asc">S&L&C ↑</option>
-        <option value="huy-desc">%Hủy ↓</option><option value="huy-asc">%Hủy ↑</option>
-        <option value="rev-desc">Doanh thu ↓</option><option value="rev-asc">Doanh thu ↑</option>
-        <option value="dio-desc">DIO ↓</option><option value="key-asc">A→Z</option>
-      </select></div>
-      <button class="btn" onclick="resetFilters()">🔄 Reset</button>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:end;justify-content:space-between">
+      <div class="filters">
+        <div class="f"><label>Tìm</label><input type="search" id="q" placeholder="Tên..." oninput="render()" style="width:110px"></div>
+        <div class="f"><label>Sắp xếp</label><select id="fSort" onchange="render()" style="width:100px">
+          <option value="slc-desc">S&L&C ↓</option><option value="huy-desc">%Hủy ↓</option>
+          <option value="rev-desc">Rev ↓</option><option value="dio-desc">DIO ↓</option>
+          <option value="key-asc">A→Z</option>
+        </select></div>
+        <button class="btn" onclick="resetFilters()" style="font-size:10px">🔄</button>
+      </div>
+      <div class="chips" id="chipCols"></div>
     </div>
-    <div id="summary" style="font-size:11px;color:var(--muted)"></div>
     <div class="tbl-wrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
     <div class="foot" id="foot"></div>
   </div>
 </div>
 
 <script>
-let DATA={gdv:[],mch3:[],mien:[],storeType:[]}, METADATA={unit:'Tr.đ'}, TAB='gdv';
+// FULL column definitions from RECAP
+const LEFT_COLS = [
+  {k:'rev_ly',l:'Rev. LY',g:'Sale'},
+  {k:'gap_sale_ly',l:'GAP Sale LY',g:'Sale'},
+  {k:'tt_ly',l:'TT vs LY',g:'Sale',fmt:'pct'},
+  {k:'rev_mtd',l:'Rev. MTD',g:'Sale'},
+  {k:'rev_lmtd',l:'Rev. LMTD',g:'Sale'},
+  {k:'gap_sale_lm',l:'GAP Sale LM',g:'Sale'},
+  {k:'tt_lm',l:'TT vs LM',g:'Sale',fmt:'pct'},
+  {k:'huy_cm',l:'%Hủy CM',g:'Hủy',fmt:'pct'},
+  {k:'huy_lm',l:'%Hủy LM',g:'Hủy',fmt:'pct'},
+  {k:'gap_sl_lm',l:'GAP S&L LM',g:'Hủy'},
+  {k:'cp_cm',l:'%CP CM',g:'CP',fmt:'pct'},
+  {k:'cp_lm',l:'%CP LM',g:'CP',fmt:'pct'},
+  {k:'gap_cp_lm',l:'GAP CP LM',g:'CP'},
+  {k:'rev_wtd',l:'Rev. WTD',g:'Week'},
+  {k:'rev_lwtd',l:'Rev. LWTD',g:'Week'},
+  {k:'tt_lw',l:'TT vs LW',g:'Week',fmt:'pct'},
+  {k:'huy_cw',l:'%Hủy CW',g:'Hủy W',fmt:'pct'},
+  {k:'huy_lw',l:'%Hủy LW',g:'Hủy W',fmt:'pct'},
+  {k:'gap_sl_lw',l:'GAP S&L LW',g:'Hủy W'},
+  {k:'rev_l7d',l:'Rev. L7D',g:'Day'},
+  {k:'rev_cd',l:'Rev. CD',g:'Day'},
+  {k:'tt_sdlw',l:'TT vs SDLW',g:'Day',fmt:'pct'},
+  {k:'stock_qty',l:'Stock Qty',g:'Stock'},
+  {k:'stock_val',l:'Stock Value',g:'Stock'},
+  {k:'dio',l:'DIO',g:'Stock',fmt:'dio'},
+];
 
-function parseXLSB(buf){
-  // Parse RECAP sheet from xlsb binary format
-  // Using the structure: sections separated by ** headers
-  const rows = [];
-  try {
-    // For xlsb, we'll use a simplified approach
-    // The data needs pyxlsb server-side - here we handle pre-parsed JSON
-    // For now, show demo if parse fails
-    return null;
-  } catch(e){ return null; }
-}
+const MCH3_COLS = [
+  {k:'rev_ly',l:'Rev. LY',g:'Sale'},
+  {k:'gap_sale_ly',l:'GAP Sale LY',g:'Sale'},
+  {k:'tt_ly',l:'TT vs LY',g:'Sale',fmt:'pct'},
+  {k:'rev_mtd',l:'Rev. MTD',g:'Sale'},
+  {k:'rev_lmtd',l:'Rev. LMTD',g:'Sale'},
+  {k:'gap_sale_lm',l:'GAP Sale LM',g:'Sale'},
+  {k:'tt_lm',l:'TT vs LM',g:'Sale',fmt:'pct'},
+  {k:'slc_cm',l:'%S&L&C CM',g:'S&L&C',fmt:'pct'},
+  {k:'slc_lm',l:'%S&L&C LM',g:'S&L&C',fmt:'pct'},
+  {k:'slc_val_lm',l:'S&L&C LM',g:'S&L&C'},
+  {k:'slc_val_cm',l:'S&L&C CM',g:'S&L&C'},
+  {k:'gap_slc_lm',l:'GAP S&L&C LM',g:'S&L&C'},
+  {k:'huy_cm',l:'%Hủy CM',g:'Hủy',fmt:'pct'},
+  {k:'huy_lm',l:'%Hủy LM',g:'Hủy',fmt:'pct'},
+  {k:'gap_sl_lm',l:'GAP S&L LM',g:'Hủy'},
+  {k:'cp_cm',l:'%CP CM',g:'CP',fmt:'pct'},
+  {k:'cp_lm',l:'%CP LM',g:'CP',fmt:'pct'},
+  {k:'gap_cp_lm',l:'GAP CP LM',g:'CP'},
+  {k:'rev_wtd',l:'Rev. WTD',g:'Week'},
+  {k:'rev_lwtd',l:'Rev. LWTD',g:'Week'},
+  {k:'tt_lw',l:'TT vs LW',g:'Week',fmt:'pct'},
+  {k:'huy_cw',l:'%Hủy CW',g:'Hủy W',fmt:'pct'},
+  {k:'huy_lw',l:'%Hủy LW',g:'Hủy W',fmt:'pct'},
+  {k:'gap_sl_lw',l:'GAP S&L LW',g:'Hủy W'},
+  {k:'rev_l7d',l:'Rev. L7D',g:'Day'},
+  {k:'rev_cd',l:'Rev. CD',g:'Day'},
+  {k:'tt_sdlw',l:'TT vs SDLW',g:'Day',fmt:'pct'},
+  {k:'stock_qty',l:'Stock Qty',g:'Stock'},
+  {k:'stock_val',l:'Stock Value',g:'Stock'},
+  {k:'dio',l:'DIO',g:'Stock',fmt:'dio'},
+];
+
+let DATA={gdv:[],mch3:[],mien:[],storeType:[]}, METADATA={unit:'Tr.đ'}, TAB='gdv', VIS={};
+LEFT_COLS.forEach(c=>{VIS[c.g]=true;});
 
 function loadData(jsonData){
-  DATA = jsonData;
+  DATA = jsonData; METADATA = jsonData.meta||{unit:'Tr.đ'};
   document.getElementById('drop').hidden = true;
   document.getElementById('app').hidden = false;
-  document.getElementById('fileinfo').textContent = 
-    (jsonData.meta?.source||'RECAP') + ' · ' + 
-    (DATA.gdv.length+DATA.mch3.length+DATA.mien.length) + ' dòng';
-  
-  // Tabs
   const tabs = [['gdv','📋 GĐV'],['mch3','🏷 Top MCH3'],['mien','🗺 Miền'],['storeType','🏪 Store Type']];
-  document.getElementById('tabs').innerHTML = tabs.map(([k,l])=>
-    `<button data-t="${k}" class="${k===TAB?'active':''}">${l} (${(DATA[k]||[]).length})</button>`).join('');
-  document.getElementById('tabs').onclick = e => {
-    const b = e.target.closest('button'); if(!b) return;
-    TAB = b.dataset.t;
-    document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
-    render();
-  };
+  document.getElementById('tabs').innerHTML = tabs.map(([k,l])=>`<button data-t="${k}" class="${k===TAB?'active':''}">${l}</button>`).join('');
+  document.getElementById('tabs').onclick = e => {const b=e.target.closest('button');if(!b)return;TAB=b.dataset.t;document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));render();};
+
+  // Column group chips
+  const cols = TAB==='mch3' ? MCH3_COLS : LEFT_COLS;
+  const groups = [...new Set(cols.map(c=>c.g))];
+  if(!Object.keys(VIS).length) groups.forEach(g=>VIS[g]=true);
+  document.getElementById('chipCols').innerHTML = groups.map(g=>`<button class="chip ${VIS[g]?'on':''}" data-g="${g}">${g}</button>`).join('');
+  document.getElementById('chipCols').onclick = e => {const b=e.target.closest('.chip');if(!b)return;const g=b.dataset.g;VIS[g]=!VIS[g];b.classList.toggle('on',VIS[g]);render();};
   render();
 }
 
 function render(){
-  const rows = DATA[TAB] || [];
+  const rows = DATA[TAB]||[];
+  const cols = TAB==='mch3' ? MCH3_COLS : LEFT_COLS;
   const q = (document.getElementById('q').value||'').toLowerCase();
   const sort = document.getElementById('fSort').value;
-  
-  let filtered = q ? rows.filter(r => (r.name||'').toLowerCase().includes(q)) : [...rows];
-  
+  let filtered = q ? rows.filter(r=>(r.name||'').toLowerCase().includes(q)) : [...rows];
   switch(sort){
-    case 'slc-desc': filtered.sort((a,b)=>(b.slc_cm||0)-(a.slc_cm||0)); break;
-    case 'slc-asc': filtered.sort((a,b)=>(a.slc_cm||0)-(b.slc_cm||0)); break;
+    case 'slc-desc': filtered.sort((a,b)=>(b.slc_cm||b.huy_cm||0)-(a.slc_cm||a.huy_cm||0)); break;
     case 'huy-desc': filtered.sort((a,b)=>(b.huy_cm||0)-(a.huy_cm||0)); break;
-    case 'huy-asc': filtered.sort((a,b)=>(a.huy_cm||0)-(b.huy_cm||0)); break;
     case 'rev-desc': filtered.sort((a,b)=>(b.rev_mtd||0)-(a.rev_mtd||0)); break;
-    case 'rev-asc': filtered.sort((a,b)=>(a.rev_mtd||0)-(b.rev_mtd||0)); break;
     case 'dio-desc': filtered.sort((a,b)=>(b.dio||0)-(a.dio||0)); break;
     default: filtered.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
   }
 
-  // KPI - compute from filtered rows
+  // KPI
   const totRev = filtered.reduce((s,r)=>s+(r.rev_mtd||0),0);
   const avgHuy = filtered.length ? filtered.reduce((s,r)=>s+(r.huy_cm||0),0)/filtered.length : 0;
   const avgDIO = filtered.length ? filtered.reduce((s,r)=>s+(r.dio||0),0)/filtered.length : 0;
-  const worstHuy = filtered.length ? Math.max(...filtered.map(r=>r.huy_cm||0)) : 0;
-  const bestHuy = filtered.length ? Math.min(...filtered.map(r=>r.huy_cm||0)) : 0;
-
   document.getElementById('kpis').innerHTML = [
-    ['Doanh thu MTD', fmt(totRev,'b'), filtered.length+' '+TAB],
-    ['%Hủy TB', (avgHuy*100).toFixed(2)+'%', Math.abs(avgHuy)>0.04?'⚠️ Cao':'✅ Ổn'],
-    ['DIO TB', Math.round(avgDIO)+' ngày', avgDIO>40?'⚠️':'✅'],
-    ['%Hủy Cao nhất', (worstHuy*100).toFixed(2)+'%', ''],
-    ['%Hủy Thấp nhất', (bestHuy*100).toFixed(2)+'%', ''],
-  ].map(([l,v,s]) => 
-    `<div class="kpi"><div class="lbl">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`
-  ).join('');
+    ['Rev MTD',fmt(totRev,'b'),filtered.length+' dòng'],
+    ['%Hủy CM TB',(avgHuy*100).toFixed(2)+'%',Math.abs(avgHuy)>0.04?'⚠️':'✅'],
+    ['DIO TB',Math.round(avgDIO)+' ngày',avgDIO>40?'⚠️':'✅'],
+    ['ĐVT',METADATA.unit,''],
+  ].map(([l,v,s])=>`<div class="kpi"><div class="lbl">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
 
-  // Table columns based on tab
-  const cols = TAB==='mch3' 
-    ? [['name','MCH3'],['rev_mtd','Rev MTD'],['slc_cm','S&L&C CM%'],['slc_lm','S&L&C LM%'],['huy_cm','%Hủy CM'],['huy_lm','%Hủy LM'],['cp_cm','%CP CM'],['cp_lm','%CP LM'],['stock_val','Tồn kho'],['dio','DIO']]
-    : [['name','Tên'],['rev_mtd','Rev MTD'],['rev_ly','Rev LY'],['tt_ly','TT vs LY%'],['huy_cm','%Hủy CM'],['huy_lm','%Hủy LM'],['gap_sl_lm','GAP S&L LM'],['cp_cm','%CP CM'],['cp_lm','%CP LM'],['gap_cp_lm','GAP CP LM'],['stock_val','Tồn kho'],['dio','DIO']];
+  // Build grouped headers
+  const activeCols = cols.filter(c=>VIS[c.g]);
+  const groups = [...new Set(activeCols.map(c=>c.g))];
+  let gRow = '<tr><th class="sticky g" rowspan="2">Tên</th>';
+  let cRow = '';
+  let colIdx = 0;
+  groups.forEach(g => {
+    const gcols = activeCols.filter(c=>c.g===g);
+    if(gcols.length>1) gRow += `<th class="g gA" colspan="${gcols.length}">${g}</th>`;
+    else gRow += `<th class="g gA" rowspan="2">${g}</th>`;
+    gcols.forEach(c => { cRow += `<th class="c" data-k="${c.k}">${c.l}</th>`; colIdx++; });
+  });
+  gRow += '</tr>';
+  document.getElementById('tbl').querySelector('thead').innerHTML = gRow + '<tr>'+cRow+'</tr>';
 
-  document.getElementById('tbl').querySelector('thead').innerHTML = 
-    '<tr>'+cols.map(([k,l])=>`<th>${l}</th>`).join('')+'</tr>';
-
-  document.getElementById('tbl').querySelector('tbody').innerHTML = 
-    filtered.map(r => '<tr>'+cols.map(([k,l]) => {
-      const v = r[k];
-      if(k==='name') return `<td>${v||''}</td>`;
-      if(typeof v !== 'number' || isNaN(v)) return `<td>—</td>`;
-      if(k.includes('huy')||k.includes('slc')||k.includes('cp')){
-        const pct = v*100;
-        const cls = k.includes('gap') ? (v>0?'cell-bad':'cell-good') : 
-                    (Math.abs(pct)>4?'cell-bad':Math.abs(pct)>2?'cell-warn':'cell-good');
-        const barW = Math.min(Math.abs(pct)*5, 60);
-        return `<td class="${cls}"><span class="bar ${Math.abs(pct)>4?'bar-red':Math.abs(pct)>2?'bar-orange':'bar-green'}" style="width:${barW}px"></span>${pct.toFixed(2)}%</td>`;
+  // Build body
+  document.getElementById('tbl').querySelector('tbody').innerHTML = filtered.map(r => {
+    let html = `<td class="sticky">${r.name||''}</td>`;
+    activeCols.forEach(c => {
+      const v = r[c.k];
+      if(v==null||isNaN(v)){ html+='<td>—</td>'; return; }
+      if(c.fmt==='pct'){
+        const pct=v*100, cls=Math.abs(pct)>4?'cell-bad':Math.abs(pct)>2?'cell-warn':'cell-good';
+        html+=`<td class="${cls}">${pct.toFixed(2)}%</td>`;
+      }else if(c.fmt==='dio'){
+        html+=`<td class="${v>40?'cell-bad':v>30?'cell-warn':'cell-good'}">${Math.round(v)}</td>`;
+      }else if(c.k.includes('rev')||c.k.includes('stock')||c.k.includes('slc_val')){
+        html+=`<td>${fmt(v,'b')}</td>`;
+      }else if(c.k.includes('gap')){
+        html+=`<td class="${v>0?'cell-bad':'cell-good'}">${fmt(v,'b')}</td>`;
+      }else{
+        html+=`<td>${v.toFixed(2)}</td>`;
       }
-      if(k==='tt_ly'){ const pct=v*100; return `<td class="${v>0?'cell-good':'cell-bad'}">${pct.toFixed(1)}%</td>`; }
-      if(k==='dio') return `<td class="${v>40?'cell-bad':v>30?'cell-warn':'cell-good'}">${Math.round(v)}</td>`;
-      if(k.includes('rev')) return `<td>${fmt(v,'b')}</td>`;
-      if(k.includes('stock')) return `<td>${fmt(v,'b')}</td>`;
-      return `<td>${v.toFixed(2)}</td>`;
-    }).join('')+'</tr>').join('');
+    });
+    return '<tr>'+html+'</tr>';
+  }).join('');
 
-  document.getElementById('foot').innerHTML = 
-    `<b>${filtered.length}</b> dòng · ĐVT: ${METADATA.unit} · <b>${new Date().toLocaleDateString('vi-VN')}</b>`;
+  document.getElementById('foot').textContent = `${filtered.length} dòng · ${activeCols.length} cột · ĐVT: ${METADATA.unit}`;
+
+  // Sort click
+  document.getElementById('tbl').querySelector('thead').onclick = e => {
+    const th = e.target.closest('th[data-k]'); if(!th) return;
+    const k = th.dataset.k;
+    document.getElementById('fSort').value = k+'-desc'; render();
+  };
 }
 
-function fmt(n, unit){ 
-  if(!n && n!==0) return '—';
-  if(unit==='b'){ const abs=Math.abs(n); if(abs>=1e9) return (n/1e9).toFixed(2)+' tỷ'; if(abs>=1e6) return (n/1e6).toFixed(1)+' tr'; return n.toFixed(1); }
-  return n.toLocaleString('vi-VN');
-}
-
-function resetFilters(){ document.getElementById('q').value=''; document.getElementById('fSort').value='slc-desc'; render(); }
+function fmt(n,unit){if(!n&&n!==0)return'—';const abs=Math.abs(n);if(unit==='b'){if(abs>=1e9)return(n/1e9).toFixed(2)+' tỷ';if(abs>=1e6)return(n/1e6).toFixed(1)+' tr';return n.toFixed(2);}return n.toLocaleString('vi-VN');}
+function resetFilters(){document.getElementById('q').value='';document.getElementById('fSort').value='slc-desc';render();}
 
 function loadFile(f){
-  if(!f) return;
-  document.getElementById('fileinfo').textContent = 'Đang đọc ' + f.name + '...';
-  const reader = new FileReader();
-  reader.onload = e => {
-    const buf = new Uint8Array(e.target.result);
-    // Try xlsx first, then CSV
-    try {
-      const wb = XLSX.read(buf, {type:'array'});
-      const sn = wb.SheetNames[0];
-      const ws = wb.Sheets[sn];
-      parseRecapSheet(ws, sn);
-    } catch(err){
-      // Try CSV
-      try {
-        const text = new TextDecoder().decode(buf);
-        alertBox('File CSV chưa được hỗ trợ. Vui lòng dùng file .xlsx hoặc .xlsb định dạng RECAP.');
-      } catch(e2){ alertBox('Không đọc được file: ' + err.message); }
-    }
+  if(!f)return;
+  document.getElementById('fileinfo').textContent='Đang đọc '+f.name+'...';
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      parseRecapSheet(ws,wb.SheetNames[0]);
+    }catch(err){alert('Không đọc được file: '+err.message);}
   };
   reader.readAsArrayBuffer(f);
 }
 
-function parseRecapSheet(ws, sn){
-  const aoa = XLSX.utils.sheet_to_json(ws, {header:1, defval:null});
-  if(!aoa.length) return alertBox('Sheet trống');
+function parseRecapSheet(ws,sn){
+  const aoa=XLSX.utils.sheet_to_json(ws,{header:1,defval:null});
+  const sections={},active={};
   
-  // Detect sections by ** marker
-  const sections = {};
-  let currentSection = null;
-  let headerRow = null;
-  
-  for(let i=0; i<aoa.length; i++){
-    const row = aoa[i];
-    const col0 = String(row[0]||'').trim();
+  // Find section markers and their headers
+  for(let i=0;i<aoa.length;i++){
+    const row=aoa[i];
+    const c0=String(row[0]||'').trim();
+    const c27=String(row[27]||'').trim();
     
-    if(col0.startsWith('**')){
-      currentSection = col0.replace(/\*\*\s*/,'').trim();
-      sections[currentSection] = {header:[], rows:[]};
-      // Read header from this or next row
-      headerRow = row;
-      // Next row might be the actual header
-      continue;
+    if(c0.startsWith('**') && c0!=='** ĐVT: Tr.đ'){
+      const snL=c0.replace(/\*\*\s*/,'').trim();
+      if(snL && !sections[snL]) sections[snL]=[];
+      // This row IS the header row (cols 1-26 are column names)
+      active.leftHeader=row.slice(1,27);
+    }
+    if(c27.startsWith('**') && c27!=='** ĐVT: Tr.đ'){
+      const snR=c27.replace(/\*\*\s*/,'').trim();
+      if(snR && !sections[snR]) sections[snR]=[];
+      active.rightHeader=row.slice(28,58);
     }
     
-    if(currentSection && !sections[currentSection].header.length && col0){
-      // This is the sub-header row
-      sections[currentSection].header = row.map(c => String(c||'').slice(0,40));
-      continue;
+    // Data rows
+    if(c0 && !c0.startsWith('**') && c0!=='Grand Total' && active.leftHeader){
+      const obj={name:c0};
+      for(let j=1;j<27;j++) obj[`v${j}`]=row[j]!=null?Number(row[j]):null;
+      // Attach to most recent left section
+      const lastLeft=Object.keys(sections).filter(k=>['Miền','GĐV','Store Type'].includes(k)).pop();
+      if(lastLeft) sections[lastLeft].push(obj);
     }
-    
-    if(currentSection && col0 && col0 !== 'Grand Total'){
-      const obj = {name: col0};
-      for(let j=1; j<27; j++) obj[`v${j}`] = row[j]!=null ? Number(row[j]) : null;
-      for(let j=27; j<Math.min(62,row.length); j++) obj[`r${j-27}`] = row[j]!=null ? Number(row[j]) : null;
-      sections[currentSection].rows.push(obj);
+    if(c27 && !c27.startsWith('**') && c27!=='Grand Total' && active.rightHeader){
+      const obj={name:c27};
+      for(let j=28;j<58;j++) obj[`r${j-27}`]=row[j]!=null?Number(row[j]):null;
+      sections[active.rightSection||'Top 20 GAP S&L&C LM']=sections[active.rightSection||'Top 20 GAP S&L&C LM']||[];
+      // Track which right section we're in
+      if(!sections[active.rightSection||'Top 20 GAP S&L&C LM']) sections[active.rightSection||'Top 20 GAP S&L&C LM']=[];
+      sections[active.rightSection||'Top 20 GAP S&L&C LM'].push(obj);
     }
+    // Track right section
+    if(c27.startsWith('**') && c27!=='** ĐVT: Tr.đ') active.rightSection=c27.replace(/\*\*\s*/,'').trim();
   }
 
-  // Map to standardized fields
-  DATA = {gdv:[], mch3:[], mien:[], storeType:[], meta:{source:sn}};
-  
-  // GĐV section: left columns 0-26
-  if(sections['GĐV']) DATA.gdv = sections['GĐV'].rows.map(r => ({
-    name: r.name,
-    rev_ly: r.v1, gap_sale_ly: r.v2, tt_ly: r.v3,
-    rev_mtd: r.v4, rev_lmtd: r.v5, gap_sale_lm: r.v6, tt_lm: r.v7,
-    huy_cm: r.v8, huy_lm: r.v9, gap_sl_lm: r.v10,
-    cp_cm: r.v11, cp_lm: r.v12, gap_cp_lm: r.v13,
-    rev_wtd: r.v14, rev_lwtd: r.v15, tt_lw: r.v16,
-    huy_cw: r.v17, huy_lw: r.v18, gap_sl_lw: r.v19,
-    rev_l7d: r.v20, rev_cd: r.v21, tt_sdlw: r.v22,
-    stock_qty: r.v23, stock_val: r.v24, dio: r.v25
+  // Map to standard fields
+  DATA.gdv=(sections['GĐV']||[]).map(r=>({
+    name:r.name, rev_ly:r.v1,gap_sale_ly:r.v2,tt_ly:r.v3, rev_mtd:r.v4,rev_lmtd:r.v5,gap_sale_lm:r.v6,tt_lm:r.v7,
+    huy_cm:r.v8,huy_lm:r.v9,gap_sl_lm:r.v10, cp_cm:r.v11,cp_lm:r.v12,gap_cp_lm:r.v13,
+    rev_wtd:r.v14,rev_lwtd:r.v15,tt_lw:r.v16, huy_cw:r.v17,huy_lw:r.v18,gap_sl_lw:r.v19,
+    rev_l7d:r.v20,rev_cd:r.v21,tt_sdlw:r.v22, stock_qty:r.v23,stock_val:r.v24,dio:r.v25
   }));
 
-  // MCH3 Top 20: right columns 27+
-  if(sections['Top 20 GAP S&L&C LM']) DATA.mch3 = sections['Top 20 GAP S&L&C LM'].rows.map(r => ({
-    name: r.name,
-    rev_ly: r.r1, gap_sale_ly: r.r2, tt_ly: r.r3,
-    rev_mtd: r.r4, rev_lmtd: r.r5, gap_sale_lm: r.r6, tt_lm: r.r7,
-    slc_cm: r.r8, slc_lm: r.r9, slc_val_lm: r.r10, slc_val_cm: r.r11,
-    gap_slc_lm: r.r12,
-    huy_cm: r.r13, huy_lm: r.r14, gap_sl_lm: r.r15,
-    cp_cm: r.r16, cp_lm: r.r17, gap_cp_lm: r.r18,
-    rev_wtd: r.r19, rev_lwtd: r.r20, tt_lw: r.r21,
-    huy_cw: r.r22, huy_lw: r.r23, gap_sl_lw: r.r24,
-    rev_l7d: r.r25, rev_cd: r.r26, tt_sdlw: r.r27,
-    stock_qty: r.r28, stock_val: r.r29, dio: r.r30
-  }));
+  const mapMCH3 = r => ({
+    name:r.name, rev_ly:r.r2||r.r1,gap_sale_ly:r.r3||r.r2,tt_ly:r.r4||r.r3, rev_mtd:r.r5||r.r4,rev_lmtd:r.r6||r.r5,gap_sale_lm:r.r7||r.r6,tt_lm:r.r8||r.r7,
+    slc_cm:r.r9||r.r8,slc_lm:r.r10||r.r9,slc_val_lm:r.r11||r.r10,slc_val_cm:r.r12||r.r11,gap_slc_lm:r.r13||r.r12,
+    huy_cm:r.r14||r.r13,huy_lm:r.r15||r.r14,gap_sl_lm:r.r16||r.r15, cp_cm:r.r17||r.r16,cp_lm:r.r18||r.r17,gap_cp_lm:r.r19||r.r18,
+    rev_wtd:r.r20||r.r19,rev_lwtd:r.r21||r.r20,tt_lw:r.r22||r.r21, huy_cw:r.r23||r.r22,huy_lw:r.r24||r.r23,gap_sl_lw:r.r25||r.r24,
+    rev_l7d:r.r26||r.r25,rev_cd:r.r27||r.r26,tt_sdlw:r.r28||r.r27, stock_qty:r.r29||r.r28,stock_val:r.r30||r.r29,dio:r.r31||r.r30
+  });
 
-  // Miền section
-  if(sections['Miền']) DATA.mien = sections['Miền'].rows.map(r => ({
-    name: r.name,
-    rev_ly: r.v1, gap_sale_ly: r.v2, tt_ly: r.v3,
-    rev_mtd: r.v4, rev_lmtd: r.v5, gap_sale_lm: r.v6, tt_lm: r.v7,
-    huy_cm: r.v8, huy_lm: r.v9, gap_sl_lm: r.v10,
-    cp_cm: r.v11, cp_lm: r.v12, gap_cp_lm: r.v13,
-    rev_wtd: r.v14, rev_lwtd: r.v15, tt_lw: r.v16,
-    huy_cw: r.v17, huy_lw: r.v18, gap_sl_lw: r.v19,
-    rev_l7d: r.v20, rev_cd: r.v21, tt_sdlw: r.v22,
-    stock_qty: r.v23, stock_val: r.v24, dio: r.v25
+  const allMCH3 = (sections['Top 20 GAP S&L&C LM']||[]).concat(sections['Top 20  S&L&C CM']||[]);
+  DATA.mch3 = allMCH3.map(mapMCH3);
+  DATA.mien = sections['Miền'] ? sections['Miền'].filter(r=>['Miền Bắc','Miền Trung','Miền Nam'].includes(r.name)).map(r=>({
+    name:r.name, rev_ly:r.v1,gap_sale_ly:r.v2,tt_ly:r.v3, rev_mtd:r.v4,rev_lmtd:r.v5,gap_sale_lm:r.v6,tt_lm:r.v7,
+    huy_cm:r.v8,huy_lm:r.v9,gap_sl_lm:r.v10, cp_cm:r.v11,cp_lm:r.v12,gap_cp_lm:r.v13,
+    rev_wtd:r.v14,rev_lwtd:r.v15,tt_lw:r.v16, huy_cw:r.v17,huy_lw:r.v18,gap_sl_lw:r.v19,
+    rev_l7d:r.v20,rev_cd:r.v21,tt_sdlw:r.v22, stock_qty:r.v23,stock_val:r.v24,dio:r.v25
+  })) : [];
+  DATA.storeType = (sections['Store Type']||[]).map(r=>({
+    name:r.name, rev_ly:r.v1,gap_sale_ly:r.v2,tt_ly:r.v3, rev_mtd:r.v4,rev_lmtd:r.v5,gap_sale_lm:r.v6,tt_lm:r.v7,
+    huy_cm:r.v8,huy_lm:r.v9,gap_sl_lm:r.v10, cp_cm:r.v11,cp_lm:r.v12,gap_cp_lm:r.v13,
+    rev_wtd:r.v14,rev_lwtd:r.v15,tt_lw:r.v16, huy_cw:r.v17,huy_lw:r.v18,gap_sl_lw:r.v19,
+    rev_l7d:r.v20,rev_cd:r.v21,tt_sdlw:r.v22, stock_qty:r.v23,stock_val:r.v24,dio:r.v25
   }));
-
-  // Store Type section
-  if(sections['Store Type']) DATA.storeType = sections['Store Type'].rows.map(r => ({
-    name: r.name,
-    rev_ly: r.v1, gap_sale_ly: r.v2, tt_ly: r.v3,
-    rev_mtd: r.v4, rev_lmtd: r.v5, gap_sale_lm: r.v6, tt_lm: r.v7,
-    huy_cm: r.v8, huy_lm: r.v9, gap_sl_lm: r.v10,
-    cp_cm: r.v11, cp_lm: r.v12, gap_cp_lm: r.v13,
-    rev_wtd: r.v14, rev_lwtd: r.v15, tt_lw: r.v16,
-    huy_cw: r.v17, huy_lw: r.v18, gap_sl_lw: r.v19,
-    rev_l7d: r.v20, rev_cd: r.v21, tt_sdlw: r.v22,
-    stock_qty: r.v23, stock_val: r.v24, dio: r.v25
-  }));
-
+  DATA.meta={source:sn,unit:'Tr.đ'};
   loadData(DATA);
 }
 
 function exportExcel(){
-  const rows = DATA[TAB]||[];
-  const ws = XLSX.utils.json_to_sheet(rows.map(r=>{
-    const o={Tên:r.name};
-    ['rev_mtd','huy_cm','huy_lm','slc_cm','slc_lm','cp_cm','cp_lm','dio','stock_val'].forEach(k=>{if(r[k]!=null)o[k]=(typeof r[k]==='number'&&k.includes('huy')||k.includes('slc')||k.includes('cp'))?(r[k]*100).toFixed(2)+'%':r[k];});
-    return o;
-  }));
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, TAB);
-  XLSX.writeFile(wb, 'MCH3_SLC_'+TAB+'.xlsx');
+  const rows=DATA[TAB]||[],cols=TAB==='mch3'?MCH3_COLS:LEFT_COLS;
+  const out=rows.map(r=>{const o={Tên:r.name};cols.forEach(c=>{o[c.l]=r[c.k];});return o;});
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(out),TAB);
+  XLSX.writeFile(wb,'MCH3_SLC_'+TAB+'.xlsx');
 }
-
-function alertBox(msg){ alert(msg); }
-
 async function fetchLiveData(){
-  try {
-    document.getElementById('fileinfo').textContent = 'Đang tải data mới nhất...';
-    const resp = await fetch('data.json');
-    if(!resp.ok) throw new Error('HTTP '+resp.status);
-    const json = await resp.json();
-    loadData(json);
-    document.getElementById('fileinfo').textContent = '✅ Data mới nhất: ' + (json.meta?.source||'RECAP') + ' · ' + (json.gdv?.length+json.mch3?.length+json.mien?.length) + ' dòng';
-  } catch(e){
-    alertBox('Không tải được data mới: ' + e.message + '\nDùng file Excel thay thế.');
-  }
+  try{
+    document.getElementById('fileinfo').textContent='Đang tải...';
+    const j=await(await fetch('data.json')).json();
+    loadData(j);
+    document.getElementById('fileinfo').textContent='✅ '+j.meta?.source+' · '+(j.gdv?.length+j.mch3?.length)+' dòng';
+  }catch(e){alert('Lỗi tải data: '+e.message);}
 }
+['dragenter','dragover'].forEach(ev=>document.addEventListener(ev,e=>{e.preventDefault();document.getElementById('drop').style.borderColor='var(--teal)';}));
+['dragleave','drop'].forEach(ev=>document.addEventListener(ev,e=>{e.preventDefault();document.getElementById('drop').style.borderColor='';if(ev==='drop'){const f=e.dataTransfer?.files?.[0];if(f)loadFile(f);}}));
 
-['dragenter','dragover'].forEach(ev => document.addEventListener(ev, e=>{e.preventDefault();document.getElementById('drop').style.borderColor='var(--teal)';}));
-['dragleave','drop'].forEach(ev => document.addEventListener(ev, e=>{e.preventDefault();document.getElementById('drop').style.borderColor='';if(ev==='drop'){const f=e.dataTransfer?.files?.[0];if(f)loadFile(f);}}));
-
-// Auto-load demo with sample data
+// Demo
 loadData({
-  gdv:[
-    {name:'Dương Tùng',rev_mtd:965.78,tt_ly:0.116,huy_cm:0.0323,huy_lm:0.0272,gap_sl_lm:3.275,cp_cm:0.0050,cp_lm:0.0049,gap_cp_lm:-0.132,stock_val:324.5,dio:36.8},
-    {name:'Bùi Thị Thu Nhài',rev_mtd:987.06,tt_ly:-0.110,huy_cm:0.0253,huy_lm:0.0215,gap_sl_lm:0.853,cp_cm:0.0059,cp_lm:0.0059,gap_cp_lm:-0.873,stock_val:298.2,dio:33.1},
-    {name:'Tạ Công Nhận',rev_mtd:2321.68,tt_ly:-0.029,huy_cm:0.0233,huy_lm:0.0221,gap_sl_lm:-1.864,cp_cm:0.0056,cp_lm:0.0050,gap_cp_lm:0.375,stock_val:712.8,dio:33.8},
-    {name:'Đặng Văn Dũng',rev_mtd:804.60,tt_ly:-0.069,huy_cm:0.0349,huy_lm:0.0379,gap_sl_lm:-3.621,cp_cm:0.0093,cp_lm:0.0067,gap_cp_lm:1.871,stock_val:348.5,dio:42.4},
-    {name:'Hồ Nam',rev_mtd:1745.30,tt_ly:-0.003,huy_cm:0.0425,huy_lm:0.0418,gap_sl_lm:-3.753,cp_cm:0.0068,cp_lm:0.0056,gap_cp_lm:1.435,stock_val:698.2,dio:44.0},
-    {name:'Nguyễn Duy Đoàn',rev_mtd:1027.99,tt_ly:0.030,huy_cm:0.0301,huy_lm:0.0315,gap_sl_lm:-4.679,cp_cm:0.0080,cp_lm:0.0059,gap_cp_lm:1.576,stock_val:476.3,dio:46.0},
-    {name:'Tạ Quốc Huy',rev_mtd:1209.42,tt_ly:-0.043,huy_cm:0.0399,huy_lm:0.0419,gap_sl_lm:-4.779,cp_cm:0.0025,cp_lm:0.0022,gap_cp_lm:0.264,stock_val:492.1,dio:44.0},
-    {name:'Phạm Minh Thu',rev_mtd:628.15,tt_ly:-0.015,huy_cm:0.0260,huy_lm:0.0260,gap_sl_lm:-7.488,cp_cm:0.0021,cp_lm:0.0019,gap_cp_lm:0.168,stock_val:218.5,dio:38.1},
-    {name:'Nguyễn Mạnh Sơn',rev_mtd:1432.89,tt_ly:0.175,huy_cm:0.0307,huy_lm:0.0307,gap_sl_lm:-8.709,cp_cm:0.0035,cp_lm:0.0028,gap_cp_lm:0.892,stock_val:598.3,dio:40.9},
-    {name:'Lê Thị Hồng Thu',rev_mtd:872.45,tt_ly:-0.016,huy_cm:0.0397,huy_lm:0.0397,gap_sl_lm:-9.325,cp_cm:0.0041,cp_lm:0.0035,gap_cp_lm:0.734,stock_val:398.7,dio:44.4},
-    {name:'Grand Total',rev_mtd:15602.92,tt_ly:0.0004,huy_cm:0.0321,huy_lm:0.0326,gap_sl_lm:-40.09,cp_cm:0.0066,cp_lm:0.0056,gap_cp_lm:9.214,stock_val:5680,dio:40.0},
+  gdv:[{name:'Tạ Công Nhận',rev_ly:2392.26,gap_sale_ly:-70.57,tt_ly:-0.029,rev_mtd:2321.68,rev_lmtd:2525.68,gap_sale_lm:-203.99,tt_lm:-0.081,huy_cm:0.0233,huy_lm:0.0221,gap_sl_lm:-1.86,cp_cm:0.0056,cp_lm:0.0050,gap_cp_lm:0.375,rev_wtd:1993.85,rev_lwtd:2100.00,tt_lw:-0.051,huy_cw:0.028,huy_lw:0.025,gap_sl_lw:2.1,rev_l7d:2180.00,rev_cd:2150.00,tt_sdlw:-0.014,stock_qty:1680000,stock_val:32450,dio:33.8},
+  {name:'Hồ Nam',rev_ly:1751.34,gap_sale_ly:-6.04,tt_ly:-0.003,rev_mtd:1745.30,rev_lmtd:1915.68,gap_sale_lm:-170.38,tt_lm:-0.089,huy_cm:0.0425,huy_lm:0.0418,gap_sl_lm:-3.75,cp_cm:0.0068,cp_lm:0.0056,gap_cp_lm:1.435,rev_wtd:1489.66,rev_lwtd:1550.00,tt_lw:-0.039,huy_cw:0.045,huy_lw:0.042,gap_sl_lw:1.8,rev_l7d:1520.00,rev_cd:1500.00,tt_sdlw:-0.013,stock_qty:1420000,stock_val:28500,dio:44.0},
+  {name:'Nguyễn Mạnh Sơn',rev_ly:1432.89,gap_sale_ly:214.92,tt_ly:0.175,rev_mtd:1432.89,rev_lmtd:1300.00,gap_sale_lm:132.89,tt_lm:0.102,huy_cm:0.0307,huy_lm:0.0307,gap_sl_lm:-8.71,cp_cm:0.0035,cp_lm:0.0028,gap_cp_lm:0.892,rev_wtd:1200.00,rev_lwtd:1150.00,tt_lw:0.043,huy_cw:0.032,huy_lw:0.031,gap_sl_lw:-3.2,rev_l7d:1180.00,rev_cd:1190.00,tt_sdlw:-0.008,stock_qty:1250000,stock_val:24800,dio:40.9},
+  {name:'Đặng Văn Dũng',rev_ly:864.60,gap_sale_ly:-59.99,tt_ly:-0.069,rev_mtd:804.60,rev_lmtd:821.95,gap_sale_lm:-17.35,tt_lm:-0.021,huy_cm:0.0349,huy_lm:0.0379,gap_sl_lm:-3.62,cp_cm:0.0093,cp_lm:0.0067,gap_cp_lm:1.871,rev_wtd:673.26,rev_lwtd:690.00,tt_lw:-0.024,huy_cw:0.038,huy_lw:0.036,gap_sl_lw:1.1,rev_l7d:700.00,rev_cd:680.00,tt_sdlw:-0.029,stock_qty:980000,stock_val:19800,dio:42.4},
+  {name:'Grand Total',rev_ly:15596.58,gap_sale_ly:6.34,tt_ly:0.0004,rev_mtd:15602.92,rev_lmtd:16725.67,gap_sale_lm:-1122.76,tt_lm:-0.067,huy_cm:0.0321,huy_lm:0.0326,gap_sl_lm:-40.09,cp_cm:0.0066,cp_lm:0.0056,gap_cp_lm:9.214,rev_wtd:13743.55,rev_lwtd:13478.41,tt_lw:0.020,huy_cw:0.043,huy_lw:0.034,gap_sl_lw:45.9,rev_l7d:13508.93,rev_cd:14122.01,tt_sdlw:0.045,stock_qty:27824520,stock_val:548981,dio:40.0},
   ],
-  mch3:[
-    {name:'Mận (Roi) đỏ An Phước',rev_mtd:40.63,slc_cm:0.1462,slc_lm:0.3732,huy_cm:0.1457,huy_lm:0.2494,cp_cm:5.94,cp_lm:5.86,stock_val:18.2,dio:38},
-    {name:'THÁI SƠN Trà sữa Ciao 270ml',rev_mtd:5.00,slc_cm:0.992,slc_lm:-0.008,huy_cm:-0.040,huy_lm:0.0079,cp_cm:4.96,cp_lm:5.00,stock_val:2.1,dio:45},
-    {name:'WMNK Nho xanh Muscat TQ (túi)',rev_mtd:73.70,slc_cm:0.221,slc_lm:0.106,huy_cm:0.201,huy_lm:0.106,cp_cm:16.28,cp_lm:3.55,stock_val:38.5,dio:52},
-    {name:'Cam sành',rev_mtd:17.68,slc_cm:0.216,slc_lm:0.224,huy_cm:0.215,huy_lm:0.223,cp_cm:3.81,cp_lm:3.50,stock_val:8.9,dio:42},
-    {name:'KARO Bánh trứng chà bông 26g',rev_mtd:2.83,slc_cm:1.451,slc_lm:0.080,huy_cm:0.246,huy_lm:0.037,cp_cm:4.11,cp_lm:2.61,stock_val:1.5,dio:55},
-    {name:'WMNK Nho đỏ không hạt TQ',rev_mtd:40.62,slc_cm:0.062,slc_lm:-0.007,huy_cm:0.062,huy_lm:-0.588,cp_cm:2.53,cp_lm:2.53,stock_val:12.8,dio:35},
-    {name:'WMNK Cam ruột vàng Úc',rev_mtd:43.72,slc_cm:0.266,slc_lm:0.201,huy_cm:0.254,huy_lm:0.194,cp_cm:11.61,cp_lm:2.43,stock_val:22.5,dio:48},
-    {name:'WINECO Dưa chuột baby L1 500gr',rev_mtd:33.02,slc_cm:0.122,slc_lm:0.064,huy_cm:0.120,huy_lm:0.058,cp_cm:4.03,cp_lm:2.37,stock_val:14.8,dio:40},
-    {name:'KARO Bánh gấu chà bông 100g',rev_mtd:14.58,slc_cm:0.212,slc_lm:0.055,huy_cm:0.069,huy_lm:0.041,cp_cm:3.09,cp_lm:2.28,stock_val:6.1,dio:42},
+  mch3:[{name:'Mận (Roi) đỏ An Phước',rev_mtd:40.63,slc_cm:0.146,slc_lm:0.373,slc_val_lm:5.94,slc_val_cm:5.86,huy_cm:0.146,huy_lm:0.249,cp_cm:0.146,cp_lm:0.249,dio:38},
+  {name:'Cam sành',rev_mtd:17.68,slc_cm:0.216,slc_lm:0.224,slc_val_lm:3.81,slc_val_cm:3.50,huy_cm:0.215,huy_lm:0.223,cp_cm:0.215,cp_lm:0.223,dio:42},
+  {name:'WMNK Nho xanh Muscat TQ',rev_mtd:73.70,slc_cm:0.221,slc_lm:0.106,slc_val_lm:16.28,slc_val_cm:3.55,huy_cm:0.201,huy_lm:0.106,cp_cm:0.201,cp_lm:0.106,dio:52},
+  {name:'THÁI SƠN Trà sữa Ciao',rev_mtd:5.00,slc_cm:0.992,slc_lm:-0.008,slc_val_lm:4.96,slc_val_cm:5.00,huy_cm:-0.040,huy_lm:0.008,cp_cm:-0.040,cp_lm:0.008,dio:45},
   ],
-  mien:[
-    {name:'Miền Bắc',rev_mtd:15602.92,tt_ly:0.0004,huy_cm:0.0321,huy_lm:0.0326,gap_sl_lm:-40.09,cp_cm:0.0066,cp_lm:0.0056,gap_cp_lm:9.214,stock_val:5680,dio:40.0},
-  ],
-  storeType:[
-    {name:'LFL',rev_mtd:15602.92,tt_ly:0.0004,huy_cm:0.0321,huy_lm:0.0326,gap_sl_lm:-40.09,cp_cm:0.0066,cp_lm:0.0056,gap_cp_lm:9.214,stock_val:5680,dio:40.0},
-  ],
-  meta:{source:'Demo 1310_MCH3'}
+  mien:[{name:'Miền Bắc',rev_mtd:15602.92,tt_ly:0.0004,huy_cm:0.0321,huy_lm:0.0326,gap_sl_lm:-40.09,cp_cm:0.0066,cp_lm:0.0056,gap_cp_lm:9.214,dio:40.0}],
+  storeType:[{name:'LFL',rev_mtd:15602.92,huy_cm:0.0321,huy_lm:0.0326,dio:40.0}],
+  meta:{source:'Demo 1310_MCH3',unit:'Tr.đ'}
 });
 </script>
 </body>
