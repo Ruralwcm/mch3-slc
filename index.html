@@ -87,6 +87,7 @@ tr.total td{font-weight:700;background:var(--teal-soft);border-top:2px solid var
     </div>
     <div>
       <button class="btn" onclick="document.getElementById('file').click()">📂 Mở Excel</button>
+      <button class="btn" onclick="fetchLiveData()">📡 Data mới</button>
       <button class="btn primary" onclick="exportExcel()">📥 Export</button>
     </div>
   </div>
@@ -358,6 +359,19 @@ function exportExcel(){
 }
 
 function alertBox(msg){ alert(msg); }
+
+async function fetchLiveData(){
+  try {
+    document.getElementById('fileinfo').textContent = 'Đang tải data mới nhất...';
+    const resp = await fetch('data.json');
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const json = await resp.json();
+    loadData(json);
+    document.getElementById('fileinfo').textContent = '✅ Data mới nhất: ' + (json.meta?.source||'RECAP') + ' · ' + (json.gdv?.length+json.mch3?.length+json.mien?.length) + ' dòng';
+  } catch(e){
+    alertBox('Không tải được data mới: ' + e.message + '\nDùng file Excel thay thế.');
+  }
+}
 
 ['dragenter','dragover'].forEach(ev => document.addEventListener(ev, e=>{e.preventDefault();document.getElementById('drop').style.borderColor='var(--teal)';}));
 ['dragleave','drop'].forEach(ev => document.addEventListener(ev, e=>{e.preventDefault();document.getElementById('drop').style.borderColor='';if(ev==='drop'){const f=e.dataTransfer?.files?.[0];if(f)loadFile(f);}}));
