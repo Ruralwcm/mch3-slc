@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MCH3 S&L&C Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --line:#d9dfdd; --ink:#17221f; --muted:#5d6b67;
+  --red:#b91c1c; --orange:#b45309; --green:#15803d; --teal:#0f5f57;
+  --red-soft:#fbe6e6; --orange-soft:#fbf0dd; --green-soft:#e5f4ea; --teal-soft:#e2f0ee;
+  --accent:#c2410c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 "Be Vietnam Pro",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{max-width:1600px;margin:0 auto;padding:12px 16px 32px;display:grid;gap:10px}
+/* Header */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:#d71920;color:#fff;font:800 18px/1 "Be Vietnam Pro",system-ui,sans-serif}
+.brand h1{margin:0;font:700 18px/1.1 "Be Vietnam Pro",system-ui,sans-serif}
+.tag{background:#d71920;color:#fff;font:600 10px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:4px}
+.fileinfo{color:var(--muted);font-size:12px}
+.btn{font:600 12px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* Drop zone */
+.drop{border:2px dashed var(--line);border-radius:10px;background:var(--surface);padding:24px;text-align:center;display:grid;gap:8px;justify-items:center;cursor:pointer}
+.drop:hover{border-color:var(--teal);background:var(--teal-soft)}
+.drop h2{margin:0;font:700 16px "Be Vietnam Pro",system-ui,sans-serif}
+.drop p{margin:0;color:var(--muted);font-size:13px}
+
+/* KPI cards */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kpi{background:var(--surface);padding:10px 14px;display:grid;gap:2px}
+.kpi .lbl{font:600 10px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font:700 20px/1.2 "Be Vietnam Pro",system-ui,sans-serif}
+.kpi .s{font-size:11px;color:var(--muted)}
+.up{color:var(--green)} .down{color:var(--red)} .warn{color:var(--orange)}
+
+/* Filters */
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:end}
+.f{display:grid;gap:2px}
+.f label{font:600 10px/1 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+select,input[type=search]{font:500 12px "Be Vietnam Pro",system-ui,sans-serif;border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--surface);color:var(--ink)}
+input[type=search]{width:140px}
+
+/* Table */
+.tbl-wrap{overflow:auto;max-height:65vh;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:right}
+th{background:var(--surface);position:sticky;top:0;z-index:2;font:600 11px/1.2 "IBM Plex Sans Condensed",sans-serif;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+th:hover{color:var(--teal)}
+th:first-child,td:first-child{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;min-width:140px}
+tr:hover td{background:var(--teal-soft)}
+tr.total td{font-weight:700;background:var(--teal-soft)}
+.cell-bad{color:var(--red);font-weight:600} .cell-warn{color:var(--orange);font-weight:600} .cell-good{color:var(--green);font-weight:600}
+
+/* Bar in cell */
+.bar{display:inline-block;height:6px;border-radius:3px;vertical-align:middle;margin-right:4px}
+.bar-red{background:var(--red)} .bar-orange{background:var(--orange)} .bar-green{background:var(--green)}
+
+.foot{color:var(--muted);font-size:11px;padding-top:8px;border-top:1px solid var(--line)}
+.foot b{color:var(--ink)}
+
+@media(max-width:760px){
+  .wrap{padding:8px 10px 24px;gap:8px}
+  .brand h1{font-size:16px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi .v{font-size:16px}
+  .filters{flex-direction:column;align-items:stretch}
+  .filters select,.filters input{width:100%;max-width:none}
+  th:first-child,td:first-child{min-width:110px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- Header -->
+  <div class="top">
+    <div class="brand">
+      <div class="logo">W</div>
+      <div>
+        <h1>MCH3 S&L&C Analysis</h1>
+        <div class="fileinfo" id="fileinfo">Tải file Excel để bắt đầu</div>
+      </div>
+      <span class="tag">DRAFT</span>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="document.getElementById('file').click()">📂 Mở Excel</button>
+      <button class="btn" onclick="loadDemo()">🎲 Demo</button>
+      <button class="btn primary" onclick="exportExcel()">📥 Export</button>
+    </div>
+  </div>
+
+  <!-- Drop zone -->
+  <div class="drop" id="drop" onclick="document.getElementById('file').click()">
+    <h2>📊 Kéo thả file Excel vào đây</h2>
+    <p>Hoặc click để chọn file · Hỗ trợ .xlsx .xls .csv</p>
+  </div>
+  <input type="file" id="file" accept=".xlsx,.xls,.csv" hidden onchange="loadFile(this.files[0])">
+
+  <!-- Dashboard (hidden until data loaded) -->
+  <div id="app" hidden>
+    <!-- KPI -->
+    <div class="kpis" id="kpis"></div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <div class="f"><label>Tìm kiếm</label><input type="search" id="q" placeholder="MCH3 / Store..." oninput="render()"></div>
+      <div class="f"><label>Miền</label><select id="fRegion" onchange="render()"><option value="">Tất cả</option></select></div>
+      <div class="f"><label>Tỉnh</label><select id="fProv" onchange="render()"><option value="">Tất cả</option></select></div>
+      <div class="f"><label>Sắp xếp</label><select id="fSort" onchange="render()">
+        <option value="sl-desc">S&L % ↓</option>
+        <option value="sl-asc">S&L % ↑</option>
+        <option value="rev-desc">Doanh thu ↓</option>
+        <option value="rev-asc">Doanh thu ↑</option>
+        <option value="dio-desc">DIO ↓</option>
+        <option value="key-asc">A→Z</option>
+      </select></div>
+      <button class="btn" onclick="resetFilters()">🔄 Reset</button>
+    </div>
+
+    <!-- Summary -->
+    <div id="summary" style="font-size:12px;color:var(--muted)"></div>
+
+    <!-- Table -->
+    <div class="tbl-wrap" id="tblWrap">
+      <table id="tbl"><thead></thead><tbody></tbody></table>
+    </div>
+
+    <div class="foot">MCH3 S&L&C Analysis · Draft v1 · <b id="rowCount"></b></div>
+  </div>
+</div>
+
+<script>
+let DATA = [], COLS = [], ALL = [];
+
+const COL_MAP = {
+  mch3: ['mch3','mch 3','nhóm hàng','ngành hàng','mã hàng','item code','category'],
+  store: ['store','cửa hàng','store code','mã ch','shop'],
+  region: ['miền','region','vùng','area'],
+  prov: ['tỉnh','tỉnh/tp','tỉnh / tp','province','prov'],
+  rev: ['doanh thu','revenue','sales','dt','doanh số'],
+  sl_pct: ['s&l %','sl %','s&l%','sl%','shrinkage %','loss %','tỷ lệ hao hụt','hao hụt %'],
+  sl_val: ['s&l','sl','shrinkage','loss','hao hụt','giá trị hao hụt','s&l value'],
+  cov: ['coverage','độ phủ','% coverage','cov %','coverage %'],
+  dio: ['dio','ngày tồn kho','days inventory'],
+  stock: ['tồn kho','tồn','inventory','stock','gt tồn','giá trị tồn'],
+  ns: ['no sale','no-sale','ns','ns %','no sale %'],
+};
+
+function norm(s){ return (s||'').toString().toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,''); }
+function matchKey(hdr){
+  const n = norm(hdr);
+  for(const [k,aliases] of Object.entries(COL_MAP)){
+    for(const a of aliases){ if(n.includes(norm(a))) return k; }
+  }
+  return null;
+}
+
+function parseFile(wb){
+  const sn = wb.SheetNames[0];
+  const ws = wb.Sheets[sn];
+  const aoa = XLSX.utils.sheet_to_json(ws, {header:1, defval:''});
+  if(!aoa.length) throw new Error('Sheet trống');
+  
+  // Detect header row
+  const hdr = aoa[0].map((c,i) => ({raw:String(c||''), idx:i}));
+  const keys = hdr.map(h => matchKey(h.raw));
+  
+  const hasMch3 = keys.includes('mch3');
+  const hasSL = keys.includes('sl_pct') || keys.includes('sl_val');
+  
+  if(!hasMch3 && !hasSL){
+    // Try row 0 as data, auto-detect columns by position
+    // Fallback: assume common layout
+    console.warn('Header not matched, trying auto-detect...');
+  }
+
+  COLS = keys;
+  DATA = [];
+  for(let r=1; r<aoa.length; r++){
+    const row = aoa[r];
+    if(!row.some(c => String(c).trim())) continue;
+    const obj = {};
+    keys.forEach((k,i) => { if(k) obj[k] = String(row[i]||'').trim(); });
+    if(!obj.mch3 && !obj.store) continue;
+    // Parse numbers
+    obj._rev = parseFloat(String(obj.rev||'0').replace(/[^0-9.-]/g,'')) || 0;
+    obj._sl_pct = parseFloat(String(obj.sl_pct||'0').replace(/[^0-9.-]/g,'')) || 0;
+    obj._sl_val = parseFloat(String(obj.sl_val||'0').replace(/[^0-9.-]/g,'')) || 0;
+    obj._cov = parseFloat(String(obj.cov||'0').replace(/[^0-9.-]/g,'')) || 0;
+    obj._dio = parseFloat(String(obj.dio||'0').replace(/[^0-9.-]/g,'')) || 0;
+    obj._stock = parseFloat(String(obj.stock||'0').replace(/[^0-9.-]/g,'')) || 0;
+    obj._ns = parseFloat(String(obj.ns||'0').replace(/[^0-9.-]/g,'')) || 0;
+    DATA.push(obj);
+  }
+  ALL = [...DATA];
+  
+  // Populate filters
+  const regions = [...new Set(DATA.map(d=>d.region).filter(Boolean))].sort();
+  const provs = [...new Set(DATA.map(d=>d.prov).filter(Boolean))].sort();
+  document.getElementById('fRegion').innerHTML = '<option value="">Tất cả</option>' + regions.map(r=>`<option value="${r}">${r}</option>`).join('');
+  document.getElementById('fProv').innerHTML = '<option value="">Tất cả</option>' + provs.map(p=>`<option value="${p}">${p}</option>`).join('');
+
+  document.getElementById('drop').hidden = true;
+  document.getElementById('app').hidden = false;
+  document.getElementById('fileinfo').textContent = sn + ' · ' + DATA.length + ' dòng';
+  render();
+}
+
+function getFiltered(){
+  let d = [...ALL];
+  const q = (document.getElementById('q').value||'').toLowerCase().trim();
+  const region = document.getElementById('fRegion').value;
+  const prov = document.getElementById('fProv').value;
+  if(q) d = d.filter(r => (r.mch3||''+r.store||'').toLowerCase().includes(q));
+  if(region) d = d.filter(r => r.region === region);
+  if(prov) d = d.filter(r => r.prov === prov);
+  return d;
+}
+
+function fmt(n, unit){ 
+  if(!n && n!==0) return '—';
+  if(unit==='pct') return n.toFixed(1) + '%';
+  if(unit==='m') return (n/1e6).toFixed(1) + 'tr';
+  if(unit==='b') return (n/1e9).toFixed(2) + ' tỷ';
+  return n.toLocaleString('vi-VN');
+}
+
+function colorSL(v){ return v > 3 ? 'cell-bad' : v > 1.5 ? 'cell-warn' : 'cell-good'; }
+function colorDIO(v){ return v > 45 ? 'cell-bad' : v > 30 ? 'cell-warn' : 'cell-good'; }
+function colorCov(v){ return v < 50 ? 'cell-bad' : v < 75 ? 'cell-warn' : 'cell-good'; }
+
+function render(){
+  const data = getFiltered();
+  const sort = document.getElementById('fSort').value;
+  
+  const groupKey = data[0]?.mch3 ? 'mch3' : 'store';
+  
+  // Aggregate
+  const map = new Map();
+  data.forEach(r => {
+    const k = r[groupKey] || '(trống)';
+    if(!map.has(k)) map.set(k, {key:k, rev:0, sl_val:0, sl_pct:0, cov:0, dio:0, stock:0, ns:0, cnt:0, regions:new Set()});
+    const m = map.get(k);
+    m.rev += r._rev; m.sl_val += r._sl_val; m.stock += r._stock; m.cnt++;
+    if(r.region) m.regions.add(r.region);
+  });
+  
+  map.forEach(m => {
+    m.sl_pct = m.rev ? (m.sl_val/m.rev)*100 : 0;
+    m.dio = m.rev ? (m.stock/(m.rev/30)) : 0;
+  });
+
+  let rows = [...map.values()];
+  
+  // Sort
+  switch(sort){
+    case 'sl-desc': rows.sort((a,b)=>b.sl_pct-a.sl_pct); break;
+    case 'sl-asc': rows.sort((a,b)=>a.sl_pct-b.sl_pct); break;
+    case 'rev-desc': rows.sort((a,b)=>b.rev-a.rev); break;
+    case 'rev-asc': rows.sort((a,b)=>a.rev-b.rev); break;
+    case 'dio-desc': rows.sort((a,b)=>b.dio-a.dio); break;
+    default: rows.sort((a,b)=>a.key.localeCompare(b.key));
+  }
+
+  // Totals
+  const tot = {key:'TỔNG', rev:0, sl_val:0, stock:0};
+  rows.forEach(r => { tot.rev += r.rev; tot.sl_val += r.sl_val; tot.stock += r.stock; });
+  tot.sl_pct = tot.rev ? (tot.sl_val/tot.rev)*100 : 0;
+  tot.dio = tot.rev ? (tot.stock/(tot.rev/30)) : 0;
+
+  // KPI
+  document.getElementById('kpis').innerHTML = [
+    ['Doanh thu', fmt(tot.rev,'b'), rows.length + ' ' + groupKey],
+    ['S&L %', tot.sl_pct.toFixed(1)+'%', tot.sl_pct>2?'⚠️ Cao':'✅ Ổn'],
+    ['S&L Value', fmt(tot.sl_val,'m'), ''],
+    ['DIO', Math.round(tot.dio)+' ngày', tot.dio>35?'⚠️':'✅'],
+    ['Tồn kho', fmt(tot.stock,'b'), ''],
+    ['Số MCH3', rows.length, '']
+  ].map(([l,v,s]) => `<div class="kpi"><div class="lbl">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
+
+  // Table
+  document.getElementById('tbl').querySelector('thead').innerHTML = `<tr>
+    <th onclick="sortBy('key')">${groupKey.toUpperCase()}</th>
+    <th onclick="sortBy('rev')">Doanh thu</th>
+    <th onclick="sortBy('sl_pct')">S&L %</th>
+    <th onclick="sortBy('sl_val')">S&L Value</th>
+    <th onclick="sortBy('dio')">DIO</th>
+    <th onclick="sortBy('stock')">Tồn kho</th>
+  </tr>`;
+
+  document.getElementById('tbl').querySelector('tbody').innerHTML = 
+    rows.map(r => `<tr>
+      <td><b>${r.key}</b></td>
+      <td>${fmt(r.rev,'b')}</td>
+      <td class="${colorSL(r.sl_pct)}"><span class="bar ${r.sl_pct>3?'bar-red':r.sl_pct>1.5?'bar-orange':'bar-green'}" style="width:${Math.min(r.sl_pct*6,60)}px"></span>${r.sl_pct.toFixed(1)}%</td>
+      <td class="${colorSL(r.sl_pct)}">${fmt(r.sl_val,'m')}</td>
+      <td class="${colorDIO(r.dio)}">${Math.round(r.dio)}</td>
+      <td>${fmt(r.stock,'b')}</td>
+    </tr>`).join('') +
+    `<tr class="total"><td><b>TỔNG (${rows.length})</b></td><td><b>${fmt(tot.rev,'b')}</b></td><td class="${colorSL(tot.sl_pct)}"><b>${tot.sl_pct.toFixed(1)}%</b></td><td class="${colorSL(tot.sl_pct)}"><b>${fmt(tot.sl_val,'m')}</b></td><td class="${colorDIO(tot.dio)}"><b>${Math.round(tot.dio)}</b></td><td><b>${fmt(tot.stock,'b')}</b></td></tr>`;
+
+  document.getElementById('rowCount').textContent = rows.length + ' nhóm | ' + data.length + ' dòng dữ liệu';
+}
+
+function sortBy(k){ document.getElementById('fSort').value = k+'-desc'; render(); }
+function resetFilters(){ document.getElementById('q').value=''; document.getElementById('fRegion').value=''; document.getElementById('fProv').value=''; document.getElementById('fSort').value='sl-desc'; render(); }
+
+function loadDemo(){
+  const regions = ['Miền Bắc','Miền Trung','Miền Nam'];
+  const provs = ['Hà Nội','HCM','Đà Nẵng','Hải Phòng','Cần Thơ','Nghệ An','Bình Dương','Đồng Nai'];
+  const mch3s = [
+    'Sữa & SP từ sữa','Nước giải khát','Bánh kẹo','Mỳ ăn liền','Gia vị & Nước chấm',
+    'Dầu ăn','Thực phẩm đông lạnh','Rau củ quả','Thịt & Hải sản','Đồ hộp',
+    'Chăm sóc cá nhân','Giặt & Vệ sinh nhà cửa','Bỉm & Em bé','Thức ăn nhanh','Cà phê & Trà'
+  ];
+  const stores = ['Store A','Store B','Store C','Store D','Store E','Store F'];
+  
+  ALL = [];
+  for(let i=0;i<200;i++){
+    const mch3 = mch3s[Math.floor(Math.random()*mch3s.length)];
+    const store = stores[Math.floor(Math.random()*stores.length)];
+    const pi = Math.floor(Math.random()*provs.length);
+    const ri = pi<5?0:pi<6?1:2;
+    const rev = Math.round(Math.random()*5e9 + 5e8);
+    const sl_pct = Math.round((Math.random()*5 + 0.2)*10)/10;
+    ALL.push({
+      mch3, store, region: regions[ri], prov: provs[pi],
+      _rev: rev, _sl_pct: sl_pct, _sl_val: rev*sl_pct/100,
+      _dio: Math.round(Math.random()*50 + 10), _stock: Math.round(Math.random()*2e9),
+      _cov: Math.round(Math.random()*40 + 50), _ns: Math.round(Math.random()*30)
+    });
+  }
+  DATA = [...ALL];
+  document.getElementById('drop').hidden = true;
+  document.getElementById('app').hidden = false;
+  document.getElementById('fileinfo').textContent = 'Demo · ' + DATA.length + ' dòng';
+  
+  const uregions = [...new Set(ALL.map(d=>d.region))].sort();
+  const uprovs = [...new Set(ALL.map(d=>d.prov))].sort();
+  document.getElementById('fRegion').innerHTML = '<option value="">Tất cả</option>'+uregions.map(r=>`<option value="${r}">${r}</option>`).join('');
+  document.getElementById('fProv').innerHTML = '<option value="">Tất cả</option>'+uprovs.map(p=>`<option value="${p}">${p}</option>`).join('');
+  render();
+}
+
+function loadFile(f){
+  if(!f) return;
+  document.getElementById('fileinfo').textContent = 'Đang đọc ' + f.name + '...';
+  const reader = new FileReader();
+  reader.onload = e => {
+    const wb = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+    parseFile(wb);
+  };
+  reader.readAsArrayBuffer(f);
+}
+
+function exportExcel(){
+  const data = getFiltered();
+  const ws = XLSX.utils.json_to_sheet(data.map(d=>({
+    MCH3: d.mch3, Store: d.store, Region: d.region, Tỉnh: d.prov,
+    'Doanh thu': d._rev, 'S&L %': d._sl_pct, 'S&L Value': d._sl_val,
+    DIO: Math.round(d._dio), 'Tồn kho': d._stock
+  })));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'S&L&C');
+  XLSX.writeFile(wb, 'MCH3_SLC_Report.xlsx');
+}
+
+// Drag & drop
+['dragenter','dragover'].forEach(ev => document.addEventListener(ev, e=>{e.preventDefault();document.getElementById('drop').style.borderColor='var(--teal)';}));
+['dragleave','drop'].forEach(ev => document.addEventListener(ev, e=>{e.preventDefault();document.getElementById('drop').style.borderColor='';if(ev==='drop'){const f=e.dataTransfer?.files?.[0];if(f)loadFile(f);}}));
+</script>
+</body>
+</html>
